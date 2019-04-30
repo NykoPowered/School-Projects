@@ -1,0 +1,46 @@
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@Zadajte\032cislo\032pro\032vypocet\032faktorialu: 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+DEFVAR LF@a 
+CREATEFRAME
+CALL $inputi
+MOVE LF@a TF@%retval
+DEFVAR LF@V1
+LT LF@V1 LF@a int@0 
+JUMPIFNEQ else1 LF@V1 bool@true
+LABEL if1
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@\010Faktorial\032nelze\032spocitat\010 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+JUMP end1
+LABEL else1
+DEFVAR LF@vysl 
+MOVE LF@vysl int@1 
+DEFVAR LF@V2
+LABEL while2
+GT LF@V2 LF@a int@0 
+JUMPIFEQ end_while2 LF@V2 bool@false
+MUL LF@vysl LF@vysl LF@a 
+SUB LF@a LF@a int@1 
+JUMP while2
+LABEL end_while2
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@
+ 
+PUSHS TF@$1
+DEFVAR TF@$2
+MOVE TF@$2 LF@vysl 
+PUSHS TF@$2
+DEFVAR TF@$3
+MOVE TF@$3 string@\010Vysledek\032je: 
+PUSHS TF@$3
+PUSHS int@3
+CALL $print
+LABEL end1

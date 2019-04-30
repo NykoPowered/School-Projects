@@ -1,0 +1,7 @@
+def func(a)
+	b = 3
+        if a > b then
+          a = b
+        end
+end
+

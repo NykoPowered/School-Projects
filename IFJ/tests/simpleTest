@@ -1,0 +1,17 @@
+a =  3
+
+
+func()
+
+faki(a,b,c)
+
+
+
+while a < 5 do
+	func()
+	a = 7
+end 
+
+
+a = 7865883
+

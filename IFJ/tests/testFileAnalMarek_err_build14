@@ -1,0 +1,4 @@
+a = 3
+s = "s"
+d = a
+inputf(a,s,d)

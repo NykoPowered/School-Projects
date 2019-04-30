@@ -1,0 +1,7 @@
+def func(a)
+        if a > b then
+          a = b
+        else
+          b = a
+        end
+end

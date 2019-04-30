@@ -1,0 +1,428 @@
+
+make clean
+
+cp Makefile Makefile_orig
+cp Makefile_test_scanner Makefile
+make
+
+cat ../tests/testFile.txt | ./ifj18 > out
+diff -s ../tests/result.output out
+rm out
+
+cat ../tests/testFileMG | ./ifj18 > out
+diff -s ../tests/resultMG.output out
+rm out
+
+cat ../tests/testFileMG1 | ./ifj18 > out
+diff -s ../tests/resultMG1.output out
+rm out
+
+cat ../tests/testFile2 | ./ifj18 > out
+diff -s ../tests/result2.output out
+rm out
+
+cat ../tests/testFileDecimal | ./ifj18 > out
+diff -s ../tests/resultDecimal.output out
+rm out
+cat ../tests/testFileComment | ./ifj18 > out
+diff -s ../tests/resultComment.output out
+rm out
+
+cat ../tests/testFile_comments.txt | ./ifj18 > out
+diff -s ../tests/testFile_comments.output out
+rm out
+
+cat ../tests/testFile_if.txt | ./ifj18 > out
+diff -s ../tests/testFile_if.output out
+rm out
+
+cat ../tests/testFile_while.txt | ./ifj18 > out
+diff -s ../tests/testFile_while.output out
+rm out
+
+cat ../tests/testFileMGDecimal | ./ifj18 > out
+diff -s ../tests/resultMGDecimal.output out
+rm out
+
+cat ../tests/testFileNiko | ./ifj18 > out
+diff -s ../tests/resultNiko.output out
+rm out
+
+cat ../tests/testFile_WeirdNumbers | ./ifj18 > out
+diff -s ../tests/testFile_WeirdNumbers.output out
+rm out
+
+cat ../tests/error1 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/error1.output out
+rm out
+
+cat ../tests/error5 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/error5.output out
+rm out
+
+cat ../tests/error7 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/error7.output out
+rm out
+
+cat ../tests/error9 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/error9.output out
+rm out
+
+cat ../tests/error11 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/error11.output out
+rm out
+
+cat ../tests/error13 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/error13.output out
+rm out
+
+cat ../tests/testFileCommentERR | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultCommentERR.output out
+rm out
+
+cat ../tests/testFileNotEnded1 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultNotEnded1.output out
+rm out
+
+cat ../tests/testFileStringERR | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultStringERR.output out
+rm out
+
+cat ../tests/testFileSimTest | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultSimTest.output out
+rm out
+
+cat ../tests/testFilecomren | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultcomren.output out
+rm out
+
+cat ../tests/Marek_err_1 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_1.output out
+rm out
+
+cat ../tests/Marek_err_2 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_2.output out
+rm out
+
+cat ../tests/Marek_err_3 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_3.output out
+rm out
+
+cat ../tests/Marek_err_4 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_4.output out
+rm out
+
+cat ../tests/Marek_err_5 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_5.output out
+rm out
+
+cat ../tests/Marek_err_6 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_6.output out
+rm out
+
+cat ../tests/Marek_err_7 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_7.output out
+rm out
+
+cat ../tests/Marek_err_8| ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/Marek_err_8.output out
+rm out
+
+cat ../tests/21 | ./ifj18 > out
+diff -s ../tests/21.out out
+rm out
+
+cat ../tests/22 | ./ifj18 > out
+diff -s ../tests/22.out out
+rm out
+
+cat ../tests/23 | ./ifj18 > out
+diff -s ../tests/23.out out
+rm out
+
+cat ../tests/24 | ./ifj18 > out
+diff -s ../tests/24.out out
+rm out
+
+cat ../tests/25 | ./ifj18 > out
+diff -s ../tests/25.out out
+rm out
+
+cat ../tests/26 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/26.out out
+rm out
+
+cat ../tests/27 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/27.out out
+rm out
+
+cat ../tests/28 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/28.out out
+rm out
+
+cat ../tests/29 | ./ifj18 > out
+diff -s ../tests/29.out out
+rm out
+
+cat ../tests/30 | ./ifj18 > out
+diff -s ../tests/30.out out
+rm out
+
+cat ../tests/31 | ./ifj18 > out
+diff -s ../tests/31.out out
+rm out
+
+cat ../tests/32 | ./ifj18 > out
+diff -s ../tests/32.out out
+rm out
+
+cat ../tests/33 | ./ifj18 > out
+diff -s ../tests/33.out out
+rm out
+
+cat ../tests/34 | ./ifj18 > out
+diff -s ../tests/34.out out
+rm out
+
+cat ../tests/35 | ./ifj18 > out
+diff -s ../tests/35.out out
+rm out
+
+cat ../tests/36 | ./ifj18 > out
+diff -s ../tests/36.out out
+rm out
+
+cat ../tests/37 | ./ifj18 > out
+diff -s ../tests/37.out out
+rm out
+
+cat ../tests/38 | ./ifj18 > out
+diff -s ../tests/38.out out
+rm out
+
+cat ../tests/39 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/39.out out
+rm out
+
+cat ../tests/40 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/40.out out
+rm out
+
+cat ../tests/testFilekam | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultkam.output out
+rm out
+
+cat ../tests/testFileNykoaa | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultNykoaa.output out
+rm out
+
+cat ../tests/testFilestriss | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultstriss.output out
+rm out
+
+cat ../tests/testFilestriss2 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultstriss2.output out
+rm out
+
+cat ../tests/testFilestriss3 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultstriss3.output out
+rm out
+
+cat ../tests/testFilehexatest | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resulthexatest.output out
+rm out
+
+cat ../tests/testFilestriss4 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultstriss4.output out
+rm out
+
+cat ../tests/testFilestriss5 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultstriss5.output out
+rm out
+
+cat ../tests/1 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/1.out out
+rm out
+
+cat ../tests/2 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/2.out out
+rm out
+
+cat ../tests/4 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/4.out out
+rm out
+
+cat ../tests/6 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/6.out out
+rm out
+
+cat ../tests/8 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/8.out out
+rm out
+
+cat ../tests/16 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/16.out out
+rm out
+
+cat ../tests/3 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/3.out out
+rm out
+
+cat ../tests/5 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/5.out out
+rm out
+
+cat ../tests/7 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/7.out out
+rm out
+
+cat ../tests/9 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/9.out out
+rm out
+
+cat ../tests/17 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/17.out out
+rm out
+
+cat ../tests/18 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/18.out out
+rm out
+
+cat ../tests/19 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/19.out out
+rm out
+
+cat ../tests/20 | ./ifj18 > out
+diff -s ../tests/20.out out
+rm out
+
+cat ../tests/215 | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/215.out out
+rm out
+
+cat ../tests/111 | ./ifj18 > out
+diff -s ../tests/111.out out
+rm out
+
+cat ../tests/112 | ./ifj18 > out
+diff -s ../tests/112.out out
+rm out
+
+cat ../tests/113 | ./ifj18 > out
+diff -s ../tests/113.out out
+rm out
+
+cat ../tests/testFileScannerMarek | ./ifj18 > out
+diff -s ../tests/testFileScannerMarek.output out
+rm out
+
+cat ../tests/testFiledecimalERR | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 1 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultdecimalERR.output out
+rm out
+
+cat ../tests/testFiledecimalGOOD | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultdecimalGOOD.output out
+rm out
+
+
+
+
+make clean
+cp Makefile_orig Makefile
+rm Makefile_orig

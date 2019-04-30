@@ -1,0 +1,21 @@
+make clean
+
+cp Makefile Makefile_orig
+cp Makefile_test_parser Makefile
+make
+
+#treba rozlisit ktory test prechadza a ktory nie
+cat ../tests/simpleTest | ./ifj18 > out
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+diff -s ../tests/resultsimpleTest.output out
+rm out
+
+
+
+make clean
+cp Makefile_orig Makefile
+rm Makefile_orig
+
+
+

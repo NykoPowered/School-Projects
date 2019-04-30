@@ -1,0 +1,4 @@
+#test 3
+asd$asd = 2
+#exit code 1
+

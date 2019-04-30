@@ -1,0 +1,8 @@
+karol = 4
+autobus = 12
+while karol <= autobus do
+	a = 5	
+	a = a + 4
+end
+
+print a

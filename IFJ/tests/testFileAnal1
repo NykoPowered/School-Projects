@@ -1,0 +1,14 @@
+def ahoj()
+
+	ja()
+	ty()
+end
+
+def ja()
+	a = 9
+end
+def ty()
+	b = 67
+end
+
+ahoj()

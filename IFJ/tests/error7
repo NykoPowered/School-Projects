@@ -1,0 +1,2 @@
+# identifikator muze zacinat malym nebo _
+A = 5

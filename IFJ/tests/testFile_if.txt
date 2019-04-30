@@ -1,0 +1,31 @@
+if (a+b) != (c+d+a*b)
+	a = 787
+end
+
+if a < 0 then
+	vysl = 198
+end
+
+if a > 0 do
+			vysl = 45
+	     a = a - 178
+     end
+
+if (auto / dom * c *b + a + b)*c then
+	auto = 79/ 29
+else
+	strom = 59 + 298*79
+end
+
+if a = 2464 then
+ 	a = 49879 * 59 / 899 + 29
+else
+	a = 27898
+end
+
+
+if not a then
+	a = 4598 + 89
+else
+	b = 7987 - 797
+end

@@ -1,0 +1,7 @@
+a = 5
+b = 2
+
+while a > b do
+a = a - 1
+print a
+done

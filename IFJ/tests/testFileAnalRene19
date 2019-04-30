@@ -1,0 +1,7 @@
+def rene(rene)
+	rene = 5
+	rene rene
+	print rene
+end
+
+rene 5

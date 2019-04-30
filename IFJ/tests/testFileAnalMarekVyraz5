@@ -1,0 +1,17 @@
+def func(a)
+ if a > 5 then
+  a = a - 1
+  print a
+ else
+  a=a+1
+  print a
+end
+end
+
+c = 4
+
+while c < 5 do
+print c
+c = c+1
+func(c)
+end

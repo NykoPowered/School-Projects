@@ -1,0 +1,10 @@
+#def moje(a)
+#a = 10 * 3 
+#end
+
+#moje(5)
+b = 4
+c = 1
+d = 5
+a = b + c + d
+

@@ -1,0 +1,9 @@
+def foo(k)
+	foo2(k) 
+end 
+
+def foo2(kilo)
+	dvakila = 873293
+	kilo = dvakilapol_kilo / dvakila 
+end
+foo(1)

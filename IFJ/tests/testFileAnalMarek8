@@ -1,0 +1,51 @@
+
+str = "ahoj"
+chr(str)
+chr("str")
+chr(23)
+
+inputi()
+inputi
+
+inputf()
+inputf
+
+inputs
+inputs()
+
+length(str)
+length str
+length "ahoj"
+length("ahoj")
+
+a = 1
+b =2
+c = 3
+d = 4
+e = 5
+f=1
+g=1
+h=1
+j=1
+k=1
+l=1
+o=1
+m=1
+n=1
+h=1
+f=1
+s=1
+w=1
+print a
+print a,a
+print a,c,d,e,g,d
+print(a,b,c,d,e,f,g,h,j,k,l,o,m,h,f,f,d,s,s,w,f)
+
+substr(a,b,c)
+substr(a,"s",4)
+substr a,3,4
+
+ord(str,b)
+ord("a",c)
+ord "a",3
+ord str,c  

@@ -1,0 +1,31 @@
+a = 5
+b = 10
+if a < b then
+ print a
+else 
+ print b
+end
+
+if a>b then
+ print a
+else 
+ print b
+end
+
+if a	<=	b then
+ print a
+else 
+ print b
+end
+
+if a	   >=   b then
+ print b
+else
+ print a
+end
+
+if a==b then 
+ 6789
+else
+ "dekel"
+end

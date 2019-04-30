@@ -1,0 +1,21 @@
+def fce(a,b,c,d,e,f,g)
+a = a
+b = b
+c = d
+e = f
+g = a
+end
+a = 1
+b = 2
+c = 3
+d = 4
+e = 5
+f = 7
+g = 8
+fce a,b,c,d,e,f,g
+
+
+
+
+
+

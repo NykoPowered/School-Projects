@@ -1,0 +1,219 @@
+.IFJcode18
+JUMP $$main
+
+JUMP $$inputf$$
+LABEL $inputf 
+PUSHFRAME
+DEFVAR LF@%retval
+READ LF@%retval float
+POPFRAME 
+RETURN 
+LABEL $$inputf$$
+
+JUMP $$inputi$$
+LABEL $inputi 
+PUSHFRAME
+DEFVAR LF@%retval
+READ LF@%retval int
+POPFRAME 
+RETURN 
+LABEL $$inputi$$
+
+JUMP $$inputs$$
+LABEL $inputs 
+PUSHFRAME
+DEFVAR LF@%retval
+READ LF@%retval string
+POPFRAME 
+RETURN 
+LABEL $$inputs$$
+
+JUMP $$ord$$
+LABEL $ord 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+DEFVAR LF@PARAM2 
+POPS LF@PARAM2 
+STRI2INT LF@%retval LF@PARAM1 LF@PARAM2
+POPFRAME 
+RETURN 
+LABEL $$ord$$
+
+JUMP $$length$$
+LABEL $length 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+STRLEN LF@%retval LF@PARAM1
+POPFRAME 
+RETURN 
+LABEL $$length$$
+
+JUMP $$chr$$
+LABEL $chr 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+INT2CHAR LF@%retval LF@PARAM1
+POPFRAME 
+RETURN 
+LABEL $$chr$$
+
+JUMP $$substr$$
+LABEL $substr 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+DEFVAR LF@PARAM2 
+POPS LF@PARAM2 
+DEFVAR LF@PARAM3 
+POPS LF@PARAM3 
+MOVE LF@%retval string@ 
+DEFVAR LF@help
+DEFVAR LF@length
+DEFVAR LF@condition
+DEFVAR LF@difference
+STRLEN LF@length LF@PARAM1
+GT LF@condition LF@length LF@PARAM2
+JUMPIFEQ err LF@condition bool@false
+GT LF@condition LF@PARAM2 int@-1
+JUMPIFEQ err LF@condition bool@false
+SUB LF@difference LF@length LF@PARAM2
+LT LF@condition LF@difference LF@PARAM3
+JUMPIFEQ exception LF@condition bool@true
+LABEL repeat
+GETCHAR LF@help LF@PARAM1 LF@PARAM2
+CONCAT LF@%retval LF@%retval LF@help
+SUB LF@PARAM3 LF@PARAM3 int@1
+ADD LF@PARAM2 LF@PARAM2 int@1
+JUMPIFNEQ repeat LF@PARAM3 int@0
+JUMP err
+LABEL exception
+LABEL repeat_2
+GETCHAR LF@help LF@PARAM1 LF@PARAM2
+CONCAT LF@%retval LF@%retval LF@help
+ADD LF@PARAM2 LF@PARAM2 int@1
+JUMPIFNEQ repeat_2 LF@PARAM2 LF@length
+LABEL err
+POPFRAME 
+RETURN 
+LABEL $$substr$$
+
+
+JUMP $$print$$
+LABEL $print
+PUSHFRAME
+DEFVAR LF@number
+POPS LF@number
+DEFVAR LF@retval
+LABEL $for
+POPS LF@retval
+WRITE LF@retval
+SUB LF@number LF@number int@1
+JUMPIFNEQ $for LF@number int@0
+MOVE LF@retval nil@nil
+POPFRAME 
+RETURN 
+LABEL $$print$$
+LABEL $$main
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@s1 
+MOVE LF@s1 string@Toto\032je\032nejaky\032text 
+DEFVAR LF@s2 
+CONCAT LF@s2 LF@s1 string@\032ktery\032jeste\032trochu\032obohatime 
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@\010 
+PUSHS TF@$1
+DEFVAR TF@$2
+MOVE TF@$2 LF@s2 
+PUSHS TF@$2
+DEFVAR TF@$3
+MOVE TF@$3 string@\010 
+PUSHS TF@$3
+DEFVAR TF@$4
+MOVE TF@$4 LF@s1 
+PUSHS TF@$4
+PUSHS int@4
+CALL $print
+DEFVAR LF@s1len 
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 LF@s1 
+PUSHS TF@$1
+CALL $length
+MOVE LF@s1len TF@%retval
+SUB LF@s1len LF@s1len int@4 
+ADD LF@s1len LF@s1len int@4 
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 int@4 
+PUSHS TF@$1
+DEFVAR TF@$2
+MOVE TF@$2 LF@s1len 
+PUSHS TF@$2
+DEFVAR TF@$3
+MOVE TF@$3 LF@s2 
+PUSHS TF@$3
+CALL $substr
+MOVE LF@s1 TF@%retval
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@\010 
+PUSHS TF@$1
+DEFVAR TF@$2
+MOVE TF@$2 LF@s1 
+PUSHS TF@$2
+DEFVAR TF@$3
+MOVE TF@$3 string@": 
+PUSHS TF@$3
+DEFVAR TF@$4
+MOVE TF@$4 LF@s2 
+PUSHS TF@$4
+DEFVAR TF@$5
+MOVE TF@$5 string@.\032znaku\032v\032" 
+PUSHS TF@$5
+DEFVAR TF@$6
+MOVE TF@$6 LF@s1len 
+PUSHS TF@$6
+DEFVAR TF@$7
+MOVE TF@$7 string@4\032znaky\032od\032 
+PUSHS TF@$7
+PUSHS int@7
+CALL $print
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@Zadejte\032serazenou\032posloupnost\032vsech\032malych\032pismen\032a.h,\032 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@pricemz\032se\032pismena\032nesmeji\032v\032posloupnosti\032opakovat:\032 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+CREATEFRAME
+CALL $inputs
+MOVE LF@s1 TF@%retval
+DEFVAR LF@V1
+LABEL while1
+EQ LF@V1 LF@s1 string@abcdefgh\010 
+JUMPIFEQ end_while1 LF@V1 bool@true
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@Spatne\032zadana\032posloupnost,\032skuste\032to\032znovu:\032\010 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+CREATEFRAME
+CALL $inputs
+MOVE LF@s1 TF@%retval
+JUMP while1
+LABEL end_while1

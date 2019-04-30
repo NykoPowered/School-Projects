@@ -1,0 +1,4 @@
+var1 = 4
+var2 = 5
+var3 = var1
+sum = var2+var1

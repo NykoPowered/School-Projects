@@ -1,0 +1,22 @@
+make clean
+
+cp Makefile Makefile_orig
+cp Makefile_test_semantic Makefile
+make
+
+valgrind --log-file="out" ./semantic > out2
+diff -s ../tests/resultSemanticStandard.output out2
+rm out2
+
+cat out | grep "All heap blocks were freed -- no leaks are possible"
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba";
+else
+echo "Test passed"
+fi
+
+rm out
+
+make clean
+cp Makefile_orig Makefile
+rm Makefile_orig

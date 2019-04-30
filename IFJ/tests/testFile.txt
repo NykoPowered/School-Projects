@@ -1,0 +1,29 @@
+jano = mato
+5 + 2
+while ( 5 > 2 )
+ 
+def factorial (n) 
+  if n < 2 then
+    result = 1
+  else
+    decremented_n = n - 1
+    temp_result = factorial(decremented_n)
+    result = n * temp_result
+  end
+  result
+end
+
+if ( mato != jano ) then
+  mato = jano
+else 
+  mato = nil 
+
+mato * jano / mato + jano - mato < mato <= jano > mato >= jano == mato != jano
+
+mato>jano
+
+# toto je komentar, ktory scanner ignoruje
+
+tu bude ciarka,ano ciarka , hej
+
+mato =		 25 		+ 		36.3 - 3 * 2.3 / 8

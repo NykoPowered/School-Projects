@@ -1,0 +1,198 @@
+.IFJcode18
+JUMP $$main
+
+JUMP $$inputf$$
+LABEL $inputf 
+PUSHFRAME
+DEFVAR LF@%retval
+READ LF@%retval float
+POPFRAME 
+RETURN 
+LABEL $$inputf$$
+
+JUMP $$inputi$$
+LABEL $inputi 
+PUSHFRAME
+DEFVAR LF@%retval
+READ LF@%retval int
+POPFRAME 
+RETURN 
+LABEL $$inputi$$
+
+JUMP $$inputs$$
+LABEL $inputs 
+PUSHFRAME
+DEFVAR LF@%retval
+READ LF@%retval string
+POPFRAME 
+RETURN 
+LABEL $$inputs$$
+
+JUMP $$ord$$
+LABEL $ord 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+DEFVAR LF@PARAM2 
+POPS LF@PARAM2 
+STRI2INT LF@%retval LF@PARAM1 LF@PARAM2
+POPFRAME 
+RETURN 
+LABEL $$ord$$
+
+JUMP $$length$$
+LABEL $length 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+STRLEN LF@%retval LF@PARAM1
+POPFRAME 
+RETURN 
+LABEL $$length$$
+
+JUMP $$chr$$
+LABEL $chr 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+INT2CHAR LF@%retval LF@PARAM1
+POPFRAME 
+RETURN 
+LABEL $$chr$$
+
+JUMP $$substr$$
+LABEL $substr 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+DEFVAR LF@PARAM2 
+POPS LF@PARAM2 
+DEFVAR LF@PARAM3 
+POPS LF@PARAM3 
+MOVE LF@%retval string@ 
+DEFVAR LF@help
+DEFVAR LF@length
+DEFVAR LF@condition
+DEFVAR LF@difference
+STRLEN LF@length LF@PARAM1
+GT LF@condition LF@length LF@PARAM2
+JUMPIFEQ err LF@condition bool@false
+GT LF@condition LF@PARAM2 int@-1
+JUMPIFEQ err LF@condition bool@false
+SUB LF@difference LF@length LF@PARAM2
+LT LF@condition LF@difference LF@PARAM3
+JUMPIFEQ exception LF@condition bool@true
+LABEL repeat
+GETCHAR LF@help LF@PARAM1 LF@PARAM2
+CONCAT LF@%retval LF@%retval LF@help
+SUB LF@PARAM3 LF@PARAM3 int@1
+ADD LF@PARAM2 LF@PARAM2 int@1
+JUMPIFNEQ repeat LF@PARAM3 int@0
+JUMP err
+LABEL exception
+LABEL repeat_2
+GETCHAR LF@help LF@PARAM1 LF@PARAM2
+CONCAT LF@%retval LF@%retval LF@help
+ADD LF@PARAM2 LF@PARAM2 int@1
+JUMPIFNEQ repeat_2 LF@PARAM2 LF@length
+LABEL err
+POPFRAME 
+RETURN 
+LABEL $$substr$$
+
+
+JUMP $$print$$
+LABEL $print
+PUSHFRAME
+DEFVAR LF@number
+POPS LF@number
+DEFVAR LF@retval
+LABEL $for
+POPS LF@retval
+WRITE LF@retval
+SUB LF@number LF@number int@1
+JUMPIFNEQ $for LF@number int@0
+MOVE LF@retval nil@nil
+POPFRAME 
+RETURN 
+LABEL $$print$$
+LABEL $$main
+CREATEFRAME
+PUSHFRAME
+
+JUMP $$factorial$$
+LABEL $factorial 
+PUSHFRAME
+DEFVAR LF@%retval
+DEFVAR LF@PARAM1 
+POPS LF@PARAM1 
+DEFVAR LF@V1
+LT LF@V1 LF@PARAM1 int@2 
+JUMPIFNEQ else1 LF@V1 bool@true
+LABEL if1
+DEFVAR LF@return 
+MOVE LF@return int@1 
+JUMP end1
+LABEL else1
+DEFVAR LF@decremented_n 
+SUB LF@decremented_n LF@PARAM1 int@1 
+DEFVAR LF@temp_result 
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 LF@decremented_n 
+PUSHS TF@$1
+CALL $factorial
+MOVE LF@temp_result TF@%retval
+DEFVAR LF@return 
+MUL LF@return LF@PARAM1 LF@temp_result 
+LABEL end1
+MOVE LF@%retval LF@return 
+POPFRAME 
+RETURN 
+LABEL $$factorial$$
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@Zadajte\032cislo\032pre\032vypocet\032faktorialu:\032 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+DEFVAR LF@a 
+CREATEFRAME
+CALL $inputi
+MOVE LF@a TF@%retval
+DEFVAR LF@V2
+LT LF@V2 LF@a int@0 
+JUMPIFNEQ else2 LF@V2 bool@true
+LABEL if2
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@\010Faktorial\032sa\032neda\032spocitat\010 
+PUSHS TF@$1
+PUSHS int@1
+CALL $print
+JUMP end2
+LABEL else2
+DEFVAR LF@vysl 
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 LF@a 
+PUSHS TF@$1
+CALL $factorial
+MOVE LF@vysl TF@%retval
+CREATEFRAME
+DEFVAR TF@$1
+MOVE TF@$1 string@\010 
+PUSHS TF@$1
+DEFVAR TF@$2
+MOVE TF@$2 LF@vysl 
+PUSHS TF@$2
+DEFVAR TF@$3
+MOVE TF@$3 string@\010Vysledok\032je\032: 
+PUSHS TF@$3
+PUSHS int@3
+CALL $print
+LABEL end2

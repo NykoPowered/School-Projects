@@ -1,0 +1,10 @@
+b = 89.8765
+a = b 
+c = b
+d = b
+e = b 
+
+b = (a + b + c + d + e)
+a=a-b-c-d-e
+c = a * (b) * c *  (d * e )
+d	= 	a	 		/ b/c   /  d / e

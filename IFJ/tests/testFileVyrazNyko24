@@ -1,0 +1,11 @@
+a = 5
+c = 8
+if a >= c then
+	if c == 4 then
+		a = a + c
+	else
+		a = a - c
+	end
+else
+	print a
+end

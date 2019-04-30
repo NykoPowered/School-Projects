@@ -1,0 +1,15 @@
+def func()
+  a = 4
+  print a
+end
+
+c = func
+
+def func2(a,b)
+  c = a + b
+  print c
+end
+
+a = 0
+
+d = func2(a,c)

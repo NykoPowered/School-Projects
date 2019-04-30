@@ -1,0 +1,6 @@
+def fce(b)
+b = b + 23
+end
+c = 28
+#a = fce(c)
+

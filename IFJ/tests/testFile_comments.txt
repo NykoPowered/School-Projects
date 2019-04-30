@@ -1,0 +1,29 @@
+=begin
+dasd
+dasdasd
+dasdas
+=end
+
+=begin abc =end
+=begin	abc	=end
+=begin wrongcomment=end
+
+
+#omegalul
+#	tab comment
+# jjjjj
+
+=begin 
+lol
+das
+das
+das
+das
+=end
+a = b
+
+=begin
+dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+dssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+=end
+

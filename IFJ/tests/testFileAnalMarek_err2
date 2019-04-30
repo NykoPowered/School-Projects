@@ -1,0 +1,12 @@
+c = 3
+
+g = c
+
+def fanksn()
+	a = 3
+	b = 4
+end
+
+a =2
+b = 3
+fanksn(a,b)

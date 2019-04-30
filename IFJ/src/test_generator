@@ -1,0 +1,25 @@
+make clean
+
+cp Makefile Makefile_orig
+cp Makefile_test_generator Makefile
+make
+
+./generator 1 > out
+diff -s out ../tests/test_generator1.output
+rm out
+
+./generator 2 > out
+diff -s out ../tests/test_generator2.output
+rm out
+
+./generator 3 > out
+diff -s out ../tests/test_generator3.output
+rm out
+
+make clean
+cp Makefile_orig Makefile
+rm Makefile_orig
+
+
+ 
+

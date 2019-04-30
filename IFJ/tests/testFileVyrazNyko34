@@ -1,0 +1,5 @@
+a = 4 	+ 5	 / 		2 		*8 + 9
+f = "string"
+_f= "string2"
+d =f+_f
+c=a+f

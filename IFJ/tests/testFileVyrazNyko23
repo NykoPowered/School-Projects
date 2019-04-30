@@ -1,0 +1,7 @@
+a = 4
+c = 5
+if a > c then
+ jozef = "auto"
+else
+ jozef = "cetrl"
+end

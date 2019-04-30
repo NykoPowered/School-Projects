@@ -1,0 +1,4 @@
+def pokus(pokus)
+	pokus = 5
+	length pokus
+end

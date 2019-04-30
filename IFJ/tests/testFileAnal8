@@ -1,0 +1,6 @@
+a = 6
+b = 10
+
+if a != b then
+
+end

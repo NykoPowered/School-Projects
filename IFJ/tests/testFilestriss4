@@ -1,0 +1,5 @@
+a = "\xfd" 
+ 
+a = "\xfA" 
+a = "\xfB" 
+a = "\xfC"

@@ -1,0 +1,8 @@
+b = 3
+c = b
+d = c
+e = inputs
+f = "Rene"
+
+a = b + c - d * b / 6 
+g = e + f

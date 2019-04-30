@@ -1,0 +1,422 @@
+#/!/bin/sh
+
+POSIXLY_CORRECT=yes;
+
+RESPONSE_CODE=408;
+
+#vymaze neuspesne requesty so suboru
+filters(){
+grep -v $RESPONSE_CODE
+}
+
+#filter IP
+request_ips(){
+awk '{print $1}'
+}
+
+
+#zoradenie
+sort_desc(){
+sort | uniq
+}
+
+#filter URI
+request_uri(){
+awk '//{print $7}'
+}
+
+#filter pre hist-ip
+request_histfor2(){
+	awk '{Ip[$1]++}END{for(var in Ip) printf var; printf " ("Ip[var]"): "
+			 for(i=0;i<Ip[var];i++) 
+			 printf "#"; print ""}' 
+}
+
+#filter pre hist-ip 2
+request_hist(){
+	awk '{Ip[$1]++}END{for(var in Ip) print var " ("Ip[var]"): "
+			 for(i=0;i<Ip[var];i++) 
+			 printf "#"; print ""}' 
+}
+
+#zoradenie pre hist-ip
+sort_hist(){
+sort -rk2	
+}
+
+
+get_request_ips(){
+cat $LOGFILE \
+| request_ips \
+| sort_desc 
+
+}
+
+get_request_uri_stdin(){
+cat \
+| request_uri \
+| sort_desc 
+
+}
+
+get_request_uri(){
+cat $LOGFILE \
+| filters \
+| request_uri \
+| sort_desc \
+
+}
+
+get_request_hist_stdin(){
+cat \
+| request_hist \
+| sort_hist 
+
+}
+
+get_request_hist(){
+cat $LOGFILE \
+| request_hist \
+| sort_hist 
+
+}
+
+#kontrola ci file existuje alebo sa neda otvorit
+check_file(){
+	if [ ! -f "$LOGFILE" ]; then
+   		echo "File '${LOGFILE}' not found or failed to open."
+   		exit 1
+   	fi
+}
+
+get_bydate(){
+	#wk -vDate=`date -d'$DATE'+[%d/%b/%Y:%H:%M:%S` ' { if ($4 > Date) print $1}' $LOGFILE | sort  |uniq -c |sort -n | tail
+	#cat $LOGFILE | awk '$4 >= "[22/Feb/2019:09:00:00" && $4 < "[22/Feb/2019:09:44:54"' | awk '{print $1}' | sort -n | sort -nr
+	cat $LOGFILE | awk -v Date=$DATE '$4 > Date' | awk '{print $1}' | sort -n | sort -nr
+}
+
+#filter URI
+get_byuri(){
+	awk -v URIC="$URI" 'URIC == $7 {print $1}' $LOGFILE | sort
+}
+
+#filter IP
+get_byIP(){
+	awk -v IP="$IP" 'IP == $1 {print $1}' $LOGFILE | sort
+}
+
+#filter
+get_byIPforuri(){
+	awk -v IP="$IP" 'IP == $1 {for (x=1; x<=42; x++) printf("%s ", $x);printf("\n");}' $LOGFILE
+}
+
+#filter
+getbyIP_hist(){
+cat $LOGFILE \
+| get_byIP \
+| request_histfor2
+}
+
+#filter
+getbyIP_uri(){
+cat $LOGFILE \
+| get_byIPforuri \
+| request_uri \
+| sort_desc
+}
+
+getbyURI_histip(){
+cat $LOGFILE \
+| get_byuri \
+| request_histfor2 \
+| sort_hist
+}
+
+
+
+#spustenie bez arhumentov, vypis obsahu STDIN
+########################### BEZ ARGUMENTOV #####################################
+
+if [ "$#" = "0" ]; then
+	if [[ -p /dev/stdin ]]
+	then
+   		cat /dev/stdin
+   	else 
+   		echo "Empty STDIN"
+   		exit 1	
+	fi
+
+#spustenie s 1 argumentom
+########################### 1 ARGUMENT #####################################
+
+
+elif [ "$#" = "1" ]; then
+	
+	if [ "$1" = "list-ip" ]; then 
+		if [[ -p /dev/stdin ]]
+		then
+    		awk '{print $1}' | sort | uniq
+    	else 
+    		echo "Empty STDIN"
+    		exit 1	
+		fi
+	
+	elif [ "$1" = "list-host" ]; then
+		if [[ -p /dev/stdin ]]
+		then
+    		get_request_uri_stdin
+    	else 
+    		echo "Empty STDIN"
+    		exit 1	
+		fi
+
+	elif [ "$1" = "list-uri" ]; then
+		if [[ -p /dev/stdin ]]
+		then
+    		get_request_uri_stdin
+    	else 
+    		echo "Empty STDIN"
+    		exit 1	
+		fi
+
+	elif [ "$1" = "hist-ip" ]; then
+		if [[ -p /dev/stdin ]]
+		then
+    		get_request_hist_stdin
+    	else 
+    		echo "Empty STDIN"
+    		exit 1	
+		fi
+	else
+		LOGFILE="$1"
+		check_file
+		cat "$LOGFILE"
+	fi
+
+#spustenie s dvoma argumentami
+########################### 2 ARGUMENTY #####################################
+
+
+
+elif [ "$#" = "2" ]; then
+	if [ "$1" = "list-ip" ]; then	
+		LOGFILE="$2"
+		check_file
+		get_request_ips
+	elif [ "$1" = "list-host" ]; then
+		LOGFILE="$2"
+		check_file
+		#LOGFILES=$(awk '{print $1}' $LOGFILE | sort | uniq)
+		while read line; do
+			#lines=$(awk '{print $1}' $line | uniq)
+			HOSTIP=$(echo $line | awk '{print $1}' | sort | uniq)
+			#echo $HOSTIP
+			host ${HOSTIP} | awk '{if ( $4 == "found:" ) print $2; else print $5;fi}' | sort | uniq | sed 's/\.[^.]*$//'
+		done <$LOGFILE
+	elif [ "$1" = "list-uri" ]; then
+		LOGFILE="$2"
+		check_file
+		get_request_uri
+	elif [ "$1" = "hist-ip" ]; then	
+		LOGFILE="$2"
+		check_file	
+		get_request_hist
+	elif [ "$1" = "-ip" ]; then
+		if [[ "$2" =~ ^[0-9a-f.:]*$ ]]; then
+			IP="$2"
+		else
+			echo "Wrong IP"
+			exit 1
+		fi
+		
+		if [[ -p /dev/stdin ]]
+		then
+    		awk -v IP="$IP" 'IP == $1 {for (x=1; x<=42; x++) printf("%s ", $x);printf("\n");}'
+    	else 
+    		echo "Empty STDIN"
+    		exit 1	
+		fi
+	elif [ "$1" = "-uri" ]; then
+		URI="$2"
+		if [[ -p /dev/stdin ]]
+		then
+    		awk -v URIC="$URI" 'URIC == $7 {print $1}' | sort
+    	else 
+    		echo "Empty STDIN"
+    		exit 1	
+		fi	
+	else
+		echo "Check arguments [2]"
+		exit 1
+	fi
+
+#spustenie s troma argumentami
+########################### 3 ARGUMENTY #####################################
+
+elif [ "$#" = "3" ]; then	
+	
+
+	if [ "$1" = "-ip" ]; then
+		if [[ "$2" =~ ^[0-9a-f.:]*$ ]]; then
+			IP="$2"
+		else
+			echo "Wrong IP"
+			exit 1
+		fi
+
+		if [ "$3" = "list-ip" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+    			awk '{print $1}' | sort | uniq
+    			get_byIPforuri
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		elif [ "$3" = "list-hosts" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+       			while read line; do
+			#lines=$(awk '{print $1}' $line | uniq)
+				HOSTIP=$(echo $line | awk '{print $1}' | sort | uniq)
+			#echo $HOSTIP
+				host ${HOSTIP} | awk '{if ( $4 == "found:" ) print $2; else print $5;fi}' | sort | uniq | sed 's/\.[^.]*$//'
+				done
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		elif [ "$3" = "list-uri" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+				get_byIPforuri
+    			get_request_uri_stdin
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		elif [ "$3" = "hist-ip" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+				get_byIPforuri
+    			get_request_hist_stdin
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		else
+			LOGFILE="$3"
+		check_file
+		get_byIPforuri		
+		fi
+	elif [ "$1" = "-uri" ]; then
+		URI="$2"
+		if [ "$3" = "list-ip" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+    			awk '{print $1}' | sort | uniq
+    			get_byuri | uniq
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		elif [ "$3" = "list-hosts" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+				get_byuri | uniq
+       			while read line; do
+			#lines=$(awk '{print $1}' $line | uniq)
+				HOSTIP=$(echo $line | awk '{print $1}' | sort | uniq)
+			#echo $HOSTIP
+				host ${HOSTIP} | awk '{if ( $4 == "found:" ) print $2; else print $5;fi}' | sort | uniq | sed 's/\.[^.]*$//'
+				done
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		elif [ "$3" = "list-uri" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+				get_byuri | uniq
+    			get_request_uri_stdin
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		elif [ "$3" = "hist-ip" ]; then
+			if [[ -p /dev/stdin ]]
+			then
+				get_byuri
+    			get_request_hist_stdin
+    		else 
+    			echo "Empty STDIN"
+    			exit 1	
+			fi
+		else
+			LOGFILE="$3"
+			check_file
+			get_byuri | uniq		
+		fi
+	fi
+
+#spustenie so styroma argumentami
+########################### 4 ARGUMENTY #####################################
+
+
+elif [ "$#" = "4" ]; then
+	
+	if [ "$1" = "-a" ]; then
+		DATE="$2"
+		LOGFILE="$4"
+		check_file
+		get_bydate
+		#get_request_ips
+	
+	elif [ "$1" = "-b" ]; then
+		get_request_ips
+	
+	elif [ "$1" = "-ip" ]; then
+		LOGFILE="$4"
+		check_file
+		#IP="$2"
+		if [[ "$2" =~ ^[0-9a-f.:]*$ ]]; then
+			IP="$2"
+		else
+			echo "Wrong IP"
+			exit 1
+		fi
+		
+		if [ "$3" = "hist-ip" ];then
+			getbyIP_hist
+		
+		elif [ "$3" = "list-uri" ]; then
+			getbyIP_uri
+			#get_byIPforuri
+		elif [ "$3" = "hist-load" ]; then
+			echo "TODO"
+			exit 1
+		elif [ "$3" = "list-hosts" ]; then
+			echo "TODO"
+			exit 1
+		fi
+
+	elif [ "$1" = "-uri" ]; then
+		LOGFILE="$4"
+		check_file
+		URI="$2"
+		if [ "$3" = "hist-ip" ];then
+			getbyURI_histip
+		elif [ "$3" = "list-uri" ]; then
+			echo "$2"
+		elif [ "$3" = "hist-load" ]; then
+			echo "TODO" 
+		elif [ "$3" = "list-hosts" ]; then
+			echo "TODO"
+		elif [ "$3" = "list-ip" ]; then
+			get_byuri | uniq
+		fi
+	fi
+else 
+	echo "Check arguments [3]"
+	exit 1	
+fi

@@ -1,0 +1,21 @@
+a = "Pivo" + "Vodka"
+bolehlav = a 
+teplapolefka = "Vifonka zo zasuvky"
+cistaHlava = bolehlav + teplapolefka + "Postel a pokoj"
+money = 10000000
+family = 42
+#42 is everything
+good_life = cistaHlava + money + family
+
+def sayNoToAlcohol?()
+	stop = 1
+	kamos_pod_na_pivo = 0
+	_10 = 0
+	_12 = 0
+	_42 = 0
+	_100 = 1
+	true = 1
+	retval = true
+end
+
+a = sayNoToAlcohol?

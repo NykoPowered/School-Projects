@@ -1,0 +1,7 @@
+k = 541
+while k < 1000 do
+k = k + 1
+while k < 1000 do
+k = k + 1
+end
+end

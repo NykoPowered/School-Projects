@@ -1,0 +1,6 @@
+a = 4
+def foo(arg1,arg2)
+	arg1 = arg2
+end
+
+foo(a,4,3)

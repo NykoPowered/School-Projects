@@ -1,0 +1,5 @@
+def func(a,b,c)
+ f = 8
+end
+
+func()

@@ -1,0 +1,10 @@
+def ff(a,b)
+
+	f(4)
+end
+
+def f(a)
+
+end
+
+ff(5,6)

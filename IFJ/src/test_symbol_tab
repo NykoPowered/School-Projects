@@ -1,0 +1,17 @@
+
+make clean
+
+cp Makefile Makefile_orig
+cp Makefile_test_symbol_tab Makefile
+
+make
+
+a=$(./symtable | grep -c "")
+if [ "$a" != 1000 ]; then  echo "test neprechadza nastala tu chyba";
+else
+echo "test passed"
+ fi
+
+make clean
+cp Makefile_orig Makefile
+rm Makefile_orig

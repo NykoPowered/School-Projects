@@ -1,0 +1,20 @@
+def fact(a,b,c)
+	o = 8
+end
+
+fact(1,2,3)
+
+
+def fact1(a,b,c)
+        o = 8
+end
+
+fact1 1,2,3 
+
+
+def fact2()
+        o = 8
+end
+
+fact2
+

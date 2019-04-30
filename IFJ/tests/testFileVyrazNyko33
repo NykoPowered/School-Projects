@@ -1,0 +1,4 @@
+c = 4
+b = c / 2
+d = b * c
+a = c+d+b / c*d +b

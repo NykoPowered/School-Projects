@@ -1,0 +1,14 @@
+make clean
+
+cp Makefile Makefile_orig
+cp Makefile_test_stack Makefile
+
+make
+./stack
+a=$(echo $?)
+if [ "$a" != 0 ]; then  echo "test neprechadza nastala tu chyba"; fi
+
+ make clean
+ cp Makefile_orig Makefile
+ rm Makefile_orig
+

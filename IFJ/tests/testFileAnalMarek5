@@ -1,0 +1,6 @@
+def func(a,b)
+  a = b
+end
+
+a = 3
+func(a,4)

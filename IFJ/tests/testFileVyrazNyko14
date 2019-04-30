@@ -1,0 +1,8 @@
+#a = substr("ahoj", 0, 2)
+print a
+
+if 0 < 10 then
+	print("dobry den;;;")
+else
+	print("jedem ti domu")
+end

@@ -1,0 +1,6 @@
+def ahoj?(arg)
+	arg = 3
+end
+
+#b = ahoj?()
+
